@@ -1,3 +1,4 @@
+# importing libs
 import pyttsx3
 import speech_recognition as sr
 
@@ -35,11 +36,11 @@ w = ['Canada']
 x = ['Argentina']
 y = ['Norway']
 z = ['Turkey']
-aa= ['South Africa']
-bb= ['Australia']
-cc= ['New Zealand']
-dd= ['Kenya']
-ee= ['Ghana']
+aa = ['South Africa']
+bb = ['Australia']
+cc = ['New Zealand']
+dd = ['Kenya']
+ee = ['Ghana']
 
 
 while True:
@@ -148,7 +149,7 @@ while True:
         var_2 = str(float(var_1)*1.65)
         engine.say(f"the value is {var_2} japanese yen")
         engine.runAndWait()
-        exit() 
+        exit()
     elif r.recognize_google(audio_country) in p:
         var_1 = r.recognize_google(audio)
         var_2 = str(float(var_1)*0.094)
@@ -160,7 +161,7 @@ while True:
         var_2 = str(float(var_1)*0.054)
         engine.say(f"the value is {var_2} malaysian ringitt")
         engine.runAndWait()
-        exit() 
+        exit()
     elif r.recognize_google(audio_country) in s:
         var_1 = r.recognize_google(audio)
         var_2 = str(float(var_1)*0.0046)
@@ -239,11 +240,3 @@ while True:
         engine.say(f"the value is {var_2} ghanaian cedi")
         engine.runAndWait()
         exit()
-    
-    
-    
-    
-    
-    
-    
-    
