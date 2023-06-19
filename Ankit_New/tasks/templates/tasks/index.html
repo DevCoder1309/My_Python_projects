@@ -1,0 +1,98 @@
+{% extends "tasks/layout.html" %} {% block body %}
+<h1 style="padding-left: 250px; display: inline">Tasks</h1>
+<button
+  id="foo"
+  type="button"
+  class="btn btn-info"
+  onclick="window.location.href = '{% url 'tasks:add'%}'"
+>
+  Add Task
+</button>
+<button
+  id="bar"
+  type="button"
+  class="btn btn-primary"
+  onclick="window.location.href = '{% url 'tasks:remove'%}'"
+>
+  Clear Tasks
+</button>
+<style>
+  body {
+    font-family: "Open Sans", helvetica, arial;
+    padding-left: 350px;
+    margin-top: 30px;
+  }
+  table {
+    width: 600px;
+    border-collapse: collapse;
+    margin: 30px 0px 30px;
+    background-color: #fff;
+    font-size: 14px;
+  }
+  table tr {
+    height: 40px;
+  }
+  table th {
+    background: #333;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  table td,
+  th {
+    padding: 6px 6px 6px 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  table tr:nth-of-type(odd) {
+    background: #eee;
+  }
+  .css-serial {
+    counter-reset: serial-number;
+  }
+  .css-serial td:first-child:before {
+    counter-increment: serial-number;
+    content: counter(serial-number);
+  }
+  #foo {
+    margin-left: 92px;
+    color: white;
+    background-color: grey;
+    border-color: black;
+    display: inline;
+  }
+  #bar {
+    color: white;
+    background-color: grey;
+    border-color: black;
+    display: inline;
+  }
+</style>
+<table class="css-serial">
+  <thead>
+    <tr>
+      <th>Sr. No</th>
+      <th>Task Name</th>
+      <th>Due Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for x in content %}
+    <tr>
+      <td>&nbsp;</td>
+      <td>{{x.0}}</td>
+      <td>{{x.1}}</td>
+      <td>{{x.2}}</td>
+      <td style="background-color: white; border:1px solid white"><div class="form-check">
+        <input
+          type="checkbox"
+          name="xyz"
+          value="{{x}}"
+        />
+      </div></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

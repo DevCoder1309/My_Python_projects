@@ -1,0 +1,39 @@
+{% extends "tasks/layout.html" %}
+{% block body %}
+<style>
+    body {
+        padding-left:300px;
+        padding-top: 20px;;
+    }
+    #foo {
+        display: inline;
+        margin-top: 30px;
+        margin-left: 300px;
+    }
+    #baz{
+        display: inline; 
+    }
+</style>
+    <h1>Add Task</h1>
+    <form action="{% url 'tasks:add' %}" method="post">
+        {% csrf_token %}
+         New task:
+         <br>
+        <div>
+            {{form.task}}
+        <br><br><br>
+        </div>
+        Due Date:
+        <div>
+             {{form.due_date}}
+        <br><br><br>
+        </div>
+        Status:
+        <div>
+            {{form.status}}
+        <br><br><br>
+        </div>
+        <input id="baz" type="submit">
+        <button id="foo" type="submit" class="btn btn-outline-primary" onclick="window.location.href = '{% url 'tasks:index'%}'">View Tasks</button>
+    </form>
+{% endblock %}
