@@ -1,0 +1,13 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    {% if user.is_authenticated %}
+       <form method="post" action="{% url 'create' %}" enctype="multipart/form-data">
+        {% csrf_token %}<br>
+           Photo URL: <div>{{forms.photo_url}}</div><br><br>Title: <div>{{forms.item}}</div><br><br>
+           Description: <div>{{forms.description}}</div><br><br>
+           Starting Bid: <div>{{forms.currentprice}}</div><br>
+           <input class="btn btn-primary p-2 m-2" type="submit" value="Submit" />
+       </form>
+       
+    {% endif %}
+{% endblock %}

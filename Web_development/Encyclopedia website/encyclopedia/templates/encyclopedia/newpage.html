@@ -1,0 +1,18 @@
+{% extends "encyclopedia/layout.html" %} 
+{% block title %} 
+{{filename}} 
+{% endblock %}
+ {% block body %}
+<form action="{% url 'create' %}" method="POST">
+  {% csrf_token%}
+  <input type="text" name="title" placeholder="title" size="50px" />
+  <label for="filename">{{filename}}</label>
+  <input type="submit" value="Save" class="btn btn-secondary" />
+  <br />
+  <textarea rows="40" cols="168" style="margin-top: 20px" name="content">
+{{content}}
+</textarea
+  >
+</form>
+
+{% endblock %}

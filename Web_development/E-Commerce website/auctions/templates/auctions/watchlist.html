@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    {% if user.is_authenticated %}
+    <h2>Watchlist</h2>
+    <br>
+    {% for i in datas %}
+        <img src="{{i.photo_url}}" width="200" height="200">
+        <a href="{% url 'active_listening' i.id %}">
+            {{i.item}}
+        </a>
+        <br>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

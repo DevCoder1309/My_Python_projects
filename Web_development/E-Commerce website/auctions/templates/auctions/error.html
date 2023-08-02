@@ -1,0 +1,6 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    {% if user.is_authenticated %}
+    <h3>Error! your bid is less than the previous bid</h3>
+    {% endif %}
+{% endblock %}

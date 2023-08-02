@@ -1,0 +1,17 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    {% if user.is_authenticated %}
+    {% if context|length == 0 %}
+        <h3>Auction Closed No Winner!</h3>
+    {% else %}
+    <h3>Winner is: 
+        {% for i in context|slice:":1" %}
+            {{i.user}}
+        {% endfor %}
+        <br>
+        And the auction is closed for this list.
+    </h3>
+    {% endif %}
+    
+    {% endif %}
+{% endblock %}

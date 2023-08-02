@@ -1,0 +1,68 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+ <form method="POST" action= "{% url 'close_auction' active_listening.id %}">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="Close Item" />
+        </form>
+    <h3>Listing: {{active_listening.item}}</h3>
+     {% if ended %}
+        <div><b>This auction has ended</b></div>
+    {% else %}
+        <a href="{% url 'add_watchlist' active_listening.id %}">Add to watchlist</a>
+         <img src="{{active_listening.photo_url}}" width="400" height="400" style="margin-left: 200px;">
+         <br>
+         <div style="padding-left: 30px;">{{active_listening.description}}<br><br>
+            <h5>
+                Bids so far:<br>
+                {% for i in bid_amount %}
+                        ${{i.amount}} by {{i.user}}, &nbsp;
+                {% endfor %}
+        <!-- {% if active_listening.bids.all.count > 0 %}
+            {{ active_listening.bids.first.amount }}
+        {% else %}
+            {{ active_listening.price }}
+        {% endif %} -->
+    </h5>
+        </div>
+    Bids: {{ active_listening.bids.all.count }}.
+    {% if not ended %}
+            Your bid is the current bid.
+    {% else %}
+            <b>You won the auction!</b>
+    {% endif %}
+    {% endif %}
+    {% if request.user.is_authenticated %}
+        <form method="POST" action="{% url 'Biding' active_listening.id %}" class="form-inline">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ bid_form.amount }}
+                <input class="btn btn-primary" type="submit" value="Place Bid" />
+            </div>
+        </form>
+    {% endif %}
+    <form method="POST" action="{% url 'comment' active_listening.id %}">
+    <div id="comments-section">
+        <h3 class="py-4">Comments <span class="badge badge-secondary badge-pill mx-1">{{ active_listening.comments.count }}</span></h3>
+        {% if request.user.is_authenticated %}
+                {% csrf_token %}
+                    {{comment_form}}
+                    <input class="btn btn-primary p-2 m-2" type="submit" value="Post a comment" />
+        </div>
+        {% endif %}
+    </form>
+        <div class="py-2">
+        {% for comment in active_listening.comments.all %}
+            <div class="card p-1 m-2 col-lg-12 col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">{{ comment.user }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ comment.time }}</h6>
+                    {{ comment.comment }}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+         
+{% endblock %}
